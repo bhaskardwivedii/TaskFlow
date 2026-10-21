@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mongo:
+        image: mongo:7
+        ports: ["27017:27017"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Server — install & unit tests (analytics pipelines)
+        working-directory: server
+        run: npm ci && npm test
+      - name: Seed a real MongoDB and run the API smoke test
+        working-directory: server
+        env:
+          MONGODB_URI: mongodb://127.0.0.1:27017/taskflow
+          JWT_SECRET: ci-secret
+        run: |
+          npm run seed
+          node src/server.js &
+          sleep 5
+          npm run smoke
+      - name: Client — build
+        working-directory: client
+        run: npm ci && npm run build
+      - name: SQL analysis on the star-schema export
+        run: |
+          pip install duckdb
+          node server/scripts/export-star-schema.js --generated
+          python analytics/run_analysis.py

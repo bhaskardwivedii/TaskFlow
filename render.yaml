@@ -1,0 +1,21 @@
+# Render Blueprint: one Docker web service (free plan).
+# The nightly snapshot runs from GitHub Actions instead (.github/workflows/nightly-snapshot.yml),
+# because Render cron jobs are not on the free plan.
+# Database: MongoDB Atlas (free M0 cluster) — set MONGODB_URI in the Render dashboard.
+services:
+  - type: web
+    name: taskflow
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false            # paste your Atlas connection string
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_ORIGIN
+        sync: false            # e.g. https://taskflow.onrender.com
+      - key: ANALYTICS_TZ
+        value: Asia/Kolkata

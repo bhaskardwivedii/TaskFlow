@@ -1,0 +1,37 @@
+user_id,name,global_role,title,department,team_id,team_role,is_active,joined_at
+6ad90599ae35afc20d1ee321,Demo Admin,admin,Engineering Director,Operations,,,true,2025-05-16T12:00:00.000Z
+6ad90599ae35afc20d1ee322,Demo Manager,manager,Engineering Manager,Engineering,,,true,2025-09-21T12:00:00.000Z
+6ad90599ae35afc20d1ee323,Nikhil Bansal,manager,Product Manager,Product,,,true,2025-05-11T12:00:00.000Z
+6ad90599ae35afc20d1ee324,Dev Khan,member,Senior Software Engineer,Engineering,6ad90599ae35afc20d1ee32c,lead,true,2025-06-27T12:00:00.000Z
+6ad90599ae35afc20d1ee325,Aditi Bansal,member,SDE II,Engineering,6ad90599ae35afc20d1ee32c,member,true,2026-04-13T12:00:00.000Z
+6ad90599ae35afc20d1ee326,Sneha Sharma,member,Software Engineer,Engineering,6ad90599ae35afc20d1ee32c,member,true,2025-12-31T12:00:00.000Z
+6ad90599ae35afc20d1ee327,Priya Sharma,member,Staff Engineer,Engineering,6ad90599ae35afc20d1ee32c,member,true,2026-02-06T12:00:00.000Z
+6ad90599ae35afc20d1ee328,Yash Mehta,member,Staff Engineer,Engineering,6ad90599ae35afc20d1ee32c,member,true,2026-03-31T12:00:00.000Z
+6ad90599ae35afc20d1ee329,Dev Bansal,member,SDE II,Engineering,6ad90599ae35afc20d1ee32c,member,true,2026-01-23T12:00:00.000Z
+6ad90599ae35afc20d1ee32a,Meera Iyer,member,Staff Engineer,Engineering,6ad90599ae35afc20d1ee32c,member,true,2025-12-24T12:00:00.000Z
+6ad90599ae35afc20d1ee32b,Aditi Chopra,member,SDE II,Engineering,6ad90599ae35afc20d1ee32c,member,true,2025-04-17T12:00:00.000Z
+6ad90599ae35afc20d1ee330,Shreya Mishra,member,Software Engineer,Engineering,6ad90599ae35afc20d1ee337,lead,true,2025-12-27T12:00:00.000Z
+6ad90599ae35afc20d1ee331,Kriti Gupta,member,SDE II,Engineering,6ad90599ae35afc20d1ee337,member,true,2025-03-21T12:00:00.000Z
+6ad90599ae35afc20d1ee332,Sneha Reddy,member,Senior Software Engineer,Engineering,6ad90599ae35afc20d1ee337,member,true,2025-08-24T12:00:00.000Z
+6ad90599ae35afc20d1ee333,Saanvi Das,member,Senior Software Engineer,Engineering,6ad90599ae35afc20d1ee337,member,true,2025-07-17T12:00:00.000Z
+6ad90599ae35afc20d1ee334,Priya Nair,member,Senior Software Engineer,Engineering,6ad90599ae35afc20d1ee337,member,true,2026-03-06T12:00:00.000Z
+6ad90599ae35afc20d1ee335,Imran Verma,member,Staff Engineer,Engineering,6ad90599ae35afc20d1ee337,member,true,2025-10-11T12:00:00.000Z
+6ad90599ae35afc20d1ee336,Siddharth Agarwal,member,Staff Engineer,Engineering,6ad90599ae35afc20d1ee337,member,true,2025-07-15T12:00:00.000Z
+6ad90599ae35afc20d1ee33a,Avni Patel,member,Data Engineer,Data,6ad90599ae35afc20d1ee340,lead,true,2026-02-22T12:00:00.000Z
+6ad90599ae35afc20d1ee33b,Nandini Bansal,member,Data Engineer,Data,6ad90599ae35afc20d1ee340,member,true,2025-05-07T12:00:00.000Z
+6ad90599ae35afc20d1ee33c,Kavya Singh,member,Analytics Engineer,Data,6ad90599ae35afc20d1ee340,member,true,2026-03-27T12:00:00.000Z
+6ad90599ae35afc20d1ee33d,Rahul Reddy,member,Data Engineer,Data,6ad90599ae35afc20d1ee340,member,true,2026-04-03T12:00:00.000Z
+6ad90599ae35afc20d1ee33e,Tara Singh,member,Analytics Engineer,Data,6ad90599ae35afc20d1ee340,member,true,2026-02-07T12:00:00.000Z
+6ad90599ae35afc20d1ee33f,Saanvi Mehta,member,Analytics Engineer,Data,6ad90599ae35afc20d1ee340,member,true,2025-07-20T12:00:00.000Z
+6ad90599ae35afc20d1ee343,Pranav Nair,member,Product Engineer,Product,6ad90599ae35afc20d1ee34a,lead,true,2025-12-10T12:00:00.000Z
+6ad90599ae35afc20d1ee344,Aditi Reddy,member,Product Engineer,Product,6ad90599ae35afc20d1ee34a,member,true,2026-02-25T12:00:00.000Z
+6ad90599ae35afc20d1ee345,Karan Joshi,member,Growth Engineer,Product,6ad90599ae35afc20d1ee34a,member,true,2025-11-17T12:00:00.000Z
+6ad90599ae35afc20d1ee346,Saanvi Singh,member,Product Analyst,Product,6ad90599ae35afc20d1ee34a,member,true,2025-05-10T12:00:00.000Z
+6ad90599ae35afc20d1ee347,Ishita Gupta,member,Product Analyst,Product,6ad90599ae35afc20d1ee34a,member,true,2025-08-16T12:00:00.000Z
+6ad90599ae35afc20d1ee348,Priya Saxena,member,Growth Engineer,Product,6ad90599ae35afc20d1ee34a,member,true,2025-10-04T12:00:00.000Z
+6ad90599ae35afc20d1ee349,Aditya Verma,member,Product Analyst,Product,6ad90599ae35afc20d1ee34a,member,true,2026-02-07T12:00:00.000Z
+6ad90599ae35afc20d1ee34e,Sara Bansal,member,Visual Designer,Design,6ad90599ae35afc20d1ee353,lead,true,2025-12-07T12:00:00.000Z
+6ad90599ae35afc20d1ee34f,Aarav Verma,member,UX Researcher,Design,6ad90599ae35afc20d1ee353,member,true,2025-08-04T12:00:00.000Z
+6ad90599ae35afc20d1ee350,Ishita Agarwal,member,Visual Designer,Design,6ad90599ae35afc20d1ee353,member,true,2026-02-17T12:00:00.000Z
+6ad90599ae35afc20d1ee351,Rahul Mehta,member,Product Designer,Design,6ad90599ae35afc20d1ee353,member,true,2025-09-04T12:00:00.000Z
+6ad90599ae35afc20d1ee352,Siddharth Chopra,member,Visual Designer,Design,6ad90599ae35afc20d1ee353,member,true,2025-09-24T12:00:00.000Z

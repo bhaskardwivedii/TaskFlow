@@ -1,0 +1,38 @@
+# Full stack locally:   docker compose up --build
+# Then seed once:       docker compose exec app node server/scripts/seed.js --force
+# Open:                 http://localhost:4000   (admin@taskflow.dev / Password@123)
+services:
+  mongo:
+    image: mongo:7
+    # Single-node replica set so multi-document transactions work (tasks + task_events commit together)
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test:
+        - CMD
+        - mongosh
+        - --quiet
+        - --eval
+        - "try { rs.status().ok } catch (e) { rs.initiate({ _id: 'rs0', members: [{ _id: 0, host: 'localhost:27017' }] }).ok }"
+      interval: 5s
+      timeout: 10s
+      retries: 20
+
+  app:
+    build: .
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/taskflow?directConnection=true
+      JWT_SECRET: ${JWT_SECRET:-local-docker-secret-change-me}
+      CLIENT_ORIGIN: http://localhost:4000
+      ANALYTICS_TZ: Asia/Kolkata
+    ports:
+      - "4000:4000"
+
+volumes:
+  mongo-data:
