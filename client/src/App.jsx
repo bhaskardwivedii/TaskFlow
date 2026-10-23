@@ -68,6 +68,9 @@ function Shell() {
             Sign out
           </button>
         </div>
+        <p className="proto-footer">
+          Prototype · <a href="mailto:bhaskardwivedi.24112004@gmail.com?subject=TaskFlow%20enquiry">contact owner</a>
+        </p>
       </aside>
       <main className="main">
         <header className="topbar">

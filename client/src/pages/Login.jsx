@@ -40,6 +40,10 @@ export default function Login() {
           <span className="s-blocked" style={{ flex: 0.6 }} />
         </div>
         <p className="muted small">Typical task: most of its life is spent waiting in To do.</p>
+        <p className="proto-note">
+          This is a prototype for demonstration. For a production version,{' '}
+          <a href="mailto:bhaskardwivedi.24112004@gmail.com?subject=TaskFlow%20—%20production%20enquiry">contact the owner</a>.
+        </p>
       </section>
       <form className="login-form" onSubmit={submit}>
         <h2>{mode === 'login' ? 'Sign in' : 'Create an account'}</h2>

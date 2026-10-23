@@ -123,4 +123,10 @@ docs/SCHEMA.md         database design, indexes, metric definitions, trade-offs
 
 Socket events: `task:created`, `task:updated`, `task:deleted`, `comment:created` (team room), `notification:new` (user room).
 
+## Resume lines
 
+> **Smart Task Management System** — React, Node.js, Express, MongoDB, Socket.io, JWT
+> - Designed an event-sourced MongoDB schema (current-state `tasks` plus an append-only `task_events` log written in the same transaction), with 22 query-driven indexes (compound, partial, multikey, text and TTL) and `$jsonSchema` validation at the database layer.
+> - Built delivery analytics with aggregation pipelines — cycle-time percentiles, time-in-status via `$setWindowFields`, WIP via running sums — and an idempotent `$merge` daily snapshot table.
+> - Exported the data as a star schema (4 dimensions, 3 fact tables) and wrote 12 SQL analyses in DuckDB that identified review bottlenecks, rework hot spots and workload concentration.
+> - Implemented JWT auth with global and team-level RBAC, optimistic concurrency for simultaneous edits, and real-time board updates and notifications over Socket.io.

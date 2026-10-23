@@ -207,3 +207,9 @@ nav a.active { background: var(--paper); color: var(--ink); box-shadow: inset 3p
 .nav-group-row .nav-group { margin: 0; }
 .nav-group-row .link { font-size: 0.8rem; }
 .head-actions { display: flex; gap: 0.5rem; }
+
+/* prototype notice */
+.proto-note { margin-top: 2rem; padding: 0.75rem 0.9rem; border: 1px solid rgba(255,255,255,0.18); border-radius: var(--r-md); font-size: 0.85rem; color: #c9d1de; max-width: 520px; }
+.proto-note a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+.proto-footer { margin: 0.5rem 0.4rem 0; font-size: 0.72rem; color: var(--ink-2); }
+.proto-footer a { color: var(--accent); }
