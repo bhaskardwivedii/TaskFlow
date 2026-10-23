@@ -11,6 +11,9 @@ import { dailyTeamSnapshot } from '../src/analytics/pipelines.js';
 
 const days = Number(process.argv.find((a) => a.startsWith('--days='))?.split('=')[1] ?? 3);
 await connectDB();
+// $merge needs a unique index on its `on` fields; create it if the database was never seeded.
+await DailyTeamStat.createCollection().catch(() => {});
+await DailyTeamStat.syncIndexes();
 const to = new Date();
 const from = new Date(to.getTime() - days * 864e5);
 await TaskEvent.aggregate(dailyTeamSnapshot({ from, to, tz: env.analyticsTz }));

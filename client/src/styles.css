@@ -201,3 +201,9 @@ nav a.active { background: var(--paper); color: var(--ink); box-shadow: inset 3p
 .heat-cell { aspect-ratio: 1; background: var(--s-in_progress); border-radius: 2px; }
 .card-meta span { white-space: nowrap; }
 .table td.num, .table th.num { white-space: nowrap; }
+
+/* team management additions */
+.nav-group-row { display: flex; align-items: center; justify-content: space-between; margin: 1rem 0.6rem 0.25rem; }
+.nav-group-row .nav-group { margin: 0; }
+.nav-group-row .link { font-size: 0.8rem; }
+.head-actions { display: flex; gap: 0.5rem; }

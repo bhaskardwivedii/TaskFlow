@@ -4,6 +4,7 @@ import { useSocketEvent } from '../auth.jsx';
 import { STATUSES, fmtDate, isOverdue, initials } from '../constants.js';
 import TaskDrawer from '../components/TaskDrawer.jsx';
 import NewTask from '../components/NewTask.jsx';
+import TeamSettings from '../components/TeamSettings.jsx';
 
 const sameTeam = (teamId) => (t) => String(t.teamId) === String(teamId);
 
@@ -14,9 +15,21 @@ export default function Board({ teamId }) {
   const [filters, setFilters] = useState({ projectId: '', assigneeId: '', q: '' });
   const [openTask, setOpenTask] = useState(null);
   const [creating, setCreating] = useState(false);
+  const [managing, setManaging] = useState(false);
   const [dragging, setDragging] = useState(null);
   const [toast, setToast] = useState('');
   const [error, setError] = useState('');
+
+  const loadMeta = useCallback(
+    () =>
+      Promise.all([api(`/teams/${teamId}`), api(`/teams/${teamId}/projects`)])
+        .then(([t, p]) => {
+          setTeam(t.team);
+          setProjects(p.projects);
+        })
+        .catch((e) => setError(e.message)),
+    [teamId],
+  );
 
   const load = useCallback(async () => {
     try {
@@ -32,13 +45,8 @@ export default function Board({ teamId }) {
   }, [teamId, filters]);
 
   useEffect(() => {
-    Promise.all([api(`/teams/${teamId}`), api(`/teams/${teamId}/projects`)])
-      .then(([t, p]) => {
-        setTeam(t.team);
-        setProjects(p.projects);
-      })
-      .catch((e) => setError(e.message));
-  }, [teamId]);
+    loadMeta();
+  }, [loadMeta]);
 
   useEffect(() => {
     load();
@@ -98,12 +106,22 @@ export default function Board({ teamId }) {
             {team.myRole === 'viewer' && ' — you have view-only access'}
           </p>
         </div>
-        {canEdit && (
-          <button className="primary" onClick={() => setCreating(true)}>
-            New task
-          </button>
-        )}
+        <div className="head-actions">
+          {(team.myRole === 'lead') && (
+            <button className="ghost" onClick={() => setManaging(true)}>
+              Manage team
+            </button>
+          )}
+          {canEdit && (
+            <button className="primary" onClick={() => setCreating(true)} disabled={projects.length === 0}>
+              New task
+            </button>
+          )}
+        </div>
       </div>
+      {canEdit && projects.length === 0 && (
+        <p className="muted small">This team has no projects yet. {team.myRole === 'lead' ? 'Open “Manage team” to add one before creating tasks.' : 'Ask a team lead to add a project.'}</p>
+      )}
 
       <div className="filters">
         <input placeholder="Search titles" value={filters.q} onChange={(e) => setFilters({ ...filters, q: e.target.value })} />
@@ -188,6 +206,7 @@ export default function Board({ teamId }) {
           }}
         />
       )}
+      {managing && <TeamSettings team={team} onClose={() => setManaging(false)} onChanged={loadMeta} />}
       {toast && (
         <div className="toast" role="status" onClick={() => setToast('')}>
           {toast}

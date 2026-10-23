@@ -5,7 +5,9 @@ import { api } from './api.js';
 import Login from './pages/Login.jsx';
 import Board from './pages/Board.jsx';
 import MyWork from './pages/MyWork.jsx';
+import People from './pages/People.jsx';
 import Notifications from './components/Notifications.jsx';
+import NewTeam from './components/NewTeam.jsx';
 
 // Charts are heavy; load the analytics bundle only when it is opened.
 const Analytics = lazy(() => import('./pages/Analytics.jsx'));
@@ -13,13 +15,16 @@ const Analytics = lazy(() => import('./pages/Analytics.jsx'));
 function Shell() {
   const { user, logout } = useAuth();
   const [teams, setTeams] = useState([]);
+  const [creatingTeam, setCreatingTeam] = useState(false);
   const navigate = useNavigate();
 
+  const loadTeams = () => api('/teams').then((r) => setTeams(r.teams));
   useEffect(() => {
-    api('/teams').then((r) => setTeams(r.teams));
+    loadTeams();
   }, []);
 
   const canAnalyse = user.role !== 'member' || teams.some((t) => t.myRole === 'lead');
+  const canCreateTeam = user.role === 'admin' || user.role === 'manager';
 
   return (
     <div className="shell">
@@ -38,13 +43,21 @@ function Shell() {
             My work
           </NavLink>
           {canAnalyse && <NavLink to="/analytics">Analytics</NavLink>}
-          <p className="nav-group">Teams</p>
+          {user.role === 'admin' && <NavLink to="/people">People</NavLink>}
+          <div className="nav-group-row">
+            <span className="nav-group">Teams</span>
+            {canCreateTeam && (
+              <button className="link" onClick={() => setCreatingTeam(true)} title="Create a team">
+                + New
+              </button>
+            )}
+          </div>
           {teams.map((t) => (
             <NavLink key={t.id} to={`/teams/${t.id}`}>
               <span className="team-key">{t.key}</span> {t.name}
             </NavLink>
           ))}
-          {teams.length === 0 && <p className="muted small">Ask a team lead to add you to a team.</p>}
+          {teams.length === 0 && !canCreateTeam && <p className="muted small">Ask a team lead to add you to a team.</p>}
         </nav>
         <div className="me">
           <div>
@@ -63,6 +76,7 @@ function Shell() {
         <Routes>
           <Route path="/" element={<MyWork />} />
           <Route path="/teams/:teamId" element={<BoardRoute />} />
+          {user.role === 'admin' && <Route path="/people" element={<People />} />}
           <Route
             path="/analytics"
             element={
@@ -74,6 +88,16 @@ function Shell() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
+      {creatingTeam && (
+        <NewTeam
+          onClose={() => setCreatingTeam(false)}
+          onCreated={async (team) => {
+            await loadTeams();
+            setCreatingTeam(false);
+            navigate(`/teams/${team._id}`);
+          }}
+        />
+      )}
     </div>
   );
 }

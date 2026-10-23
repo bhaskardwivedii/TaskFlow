@@ -12,6 +12,7 @@ import * as teams from '../controllers/teamController.js';
 import * as tasks from '../controllers/taskController.js';
 import * as analytics from '../controllers/analyticsController.js';
 import * as notifications from '../controllers/notificationController.js';
+import * as users from '../controllers/userController.js';
 
 const router = Router();
 
@@ -43,6 +44,10 @@ router.get('/teams/:teamId', requireTeamRole('viewer'), h(teams.getTeam));
 router.post('/teams/:teamId/members', requireTeamRole('lead'), validate({ body: teams.addMemberSchema }), h(teams.addMember));
 router.patch('/teams/:teamId/members/:userId', requireTeamRole('lead'), validate({ params: teams.memberParams, body: teams.memberRoleSchema }), h(teams.updateMemberRole));
 router.delete('/teams/:teamId/members/:userId', requireTeamRole('lead'), validate({ params: teams.memberParams }), h(teams.removeMember));
+
+// ---- users (admin directory + global role management) ----
+router.get('/users', authorize('admin', 'manager'), h(users.listUsers));
+router.patch('/users/:id/role', authorize('admin'), validate({ params: idParam('id'), body: users.roleSchema }), h(users.updateRole));
 
 // ---- projects ----
 router.get('/teams/:teamId/projects', requireTeamRole('viewer'), h(teams.listProjects));
